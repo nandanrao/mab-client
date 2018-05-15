@@ -1,0 +1,8 @@
+button.playbox {
+  width: 80px;
+  height: 80px;
+}
+
+button.playbox:disabled:hover {
+  cursor: default;
+}
