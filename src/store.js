@@ -17,13 +17,15 @@ const persistConfig = {
 const reducer = persistReducer(persistConfig,
                                combineReducers({...reducers, routerReducer}));
 
+const middlewares = [thunkMiddleware,routerMiddleware(history)]
+
+if (process.env.NODE_ENV === `development`) {
+  middlewares.push(createLogger());
+}
+
 export const store = createStore(
   reducer,
-  applyMiddleware(
-    thunkMiddleware,
-    routerMiddleware(history),
-    createLogger()
-  )
+  applyMiddleware(...middlewares)
 );
 
 export const persistor = persistStore(store);
