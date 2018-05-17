@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './reset.css';
 import './App.css';
 import Introduction from './steps/Introduction';
+import Question from './steps/Question';
 import Play from './steps/Play';
 import { Route } from 'react-router';
 import { ConnectedRouter, push } from 'react-router-redux';
@@ -12,7 +13,6 @@ import {store} from './store';
 import random from './random';
 
 class App extends Component {
-
 
   constructor(props) {
     super(props)
@@ -34,6 +34,7 @@ class App extends Component {
         <div className="App">
           <Route exact path="/" render={(rp) => <Introduction {...rp} {...this.props} /> }/>
           <Route exact path="/play" render={(rp) => <Play {...rp} {...this.props} /> }/>
+          <Route exact path="/question" render={(rp) => <Question {...rp} {...this.props} /> }/>
         </div>
       </ConnectedRouter>
     );

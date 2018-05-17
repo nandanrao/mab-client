@@ -3,30 +3,25 @@ import Playbox from '../playbox/Playbox';
 import {push} from 'react-router-redux';
 import {store} from '../store';
 import qs from 'query-string';
+import {boxPlayed} from '../actions';
+import random from '../random';
 
-import random from 'random-js'
-// create state such that we know how many boxes have been clicked
-// and the outcome of the boxes!!
-// disable the continue button until all boxes clicked.
 
 export default (props) => {
-  const round = qs.parse(props.location.search).round
+  const round = props.boxes.length - 1;
+  const boxes = props.boxes[round];
 
-  const report = (i, res) => {
-    store.dispatch({type: 'BOX_PLAYED', round: round, idx: i, result: res })
-  }
+  const allBoxesClicked = boxes.filter(b => !!b.result).reduce((a,b) => a+1, 0) === boxes.length
 
-  const boxes = props.boxes[round].map((b,i) => <Playbox key={i} report={report.bind(this, i)} result={b.result} outcome={b.outcome}/>)
-
-  console.log('rendering', boxes)
+  const playBoxes = boxes.map((b,i) => <Playbox key={i} report={boxPlayed.bind(this, round, i)} result={b.result} outcome={b.outcome}/>)
 
   return <div className="play">
     <p>
-    Play the game!
+    Click all the boxes, see how much you win!
     </p>
     <div className="boxes">
-    {boxes}
+    {playBoxes}
   </div>
-    <button className="accept" onClick={() => store.dispatch(push('/'))}> continue </button>
+    <button disabled={!allBoxesClicked} className="accept" onClick={() => store.dispatch(push(`/question?q=${round === 1 ? 1 : 3 }`))}> continue </button>
     </div>
 }

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700|Montserrat');
 
 
-a, button, h1, h2, h3 {
+a, button, h1, h2, h3, span {
   font-family: 'Inconsolata', monospace;
   font-weight: 700;
 }
@@ -11,18 +11,43 @@ p {
   font-size: 1.5em;
 }
 
-.intro p {
+.question span {
+  font-size: 2em;
+}
+
+.intro p, .question p {
   margin: 1em auto;
   line-height: 1.5em;
 }
-.intro p:last-of-type{
-  margin-bottom: 2em;
+
+.question form {
+  margin: 3em auto;
 }
 
-div.intro {
+.question input {
+  width: 250px;
+}
+
+.question span {
+  font-size: 1em;
+}
+
+.question h3 {
+  margin: 0.5em;
+  font-size: 2em;
+  display: block;
+}
+
+div.intro, div.question {
   text-align: center;
-  width: 75%;
+  width: 80%;
+  max-width: 800px;
   margin: 4em auto;
+}
+
+.question button {
+  display: block;
+  margin: 2em auto;
 }
 
 button {
@@ -44,12 +69,23 @@ button.accept {
 }
 
 .play {
-  width: 50%;
+  width: 800px;
+  max-width: 90%;
   margin: 2em auto;
 }
 
 .play p {
   text-align: center;
+}
+
+.play button:disabled {
+  cursor: default;
+  border-color: gray;
+}
+
+.play button:disabled:hover {
+  border-color: gray;
+  color: gray;
 }
 
 .boxes {

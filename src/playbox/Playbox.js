@@ -14,7 +14,7 @@ export default class Playbox extends Component {
   constructor() {
     super();
     this.icons = [faFrog, faFeather, faKiwiBird, faDove]
-    this.state = { icon: this.icons[random.integer(0,3)], color: 'inherit' };
+    this.state = { icon: this.icons[random.integer(0,3)] };
   }
 
   flipIcon =  () => {
@@ -24,15 +24,6 @@ export default class Playbox extends Component {
     this.setState({ icon: this.icons[nxt] });
   }
 
-  win = () => {
-    this.setState({ icon: faGem, color: 'green', disabled: true })
-  }
-
-  lose = () => {
-    this.setState({ icon: faSkull, color: 'red', disabled: true })
-  }
-
-  // add an ability to actually run randomly! And to return outcome to parent on callback
   roll = () => {
     let res;
     if (typeof this.props.outcome === 'string') {
@@ -56,13 +47,18 @@ export default class Playbox extends Component {
     setTimeout(this.roll, lst*rate)
   }
 
-  componentWillReceiveProps(props) {
-    if (props.result) {
-      props.result === 'win' ? this.win() : this.lose();
-    }
-  }
-
   render() {
-    return <button className="playbox" disabled={!!this.props.result} style={{ color: this.state.color, borderColor: this.state.color }} onClick={this.click.bind(this)}> <FontAwesomeIcon icon={ this.state.icon } size="2x" /> </button>
+    let icon, color, disabled;
+
+    if (this.props.result) {
+      [icon, color, disabled] = this.props.result === 'win'
+        ? [faGem, 'green', true]
+        : [faSkull, 'red', true];
+    }
+    else {
+      [icon, color, disabled] = [this.state.icon, 'inherit', false]
+    }
+
+    return <button className="playbox" disabled={!!this.props.result} style={{ color: color, borderColor: color }} onClick={this.click.bind(this)}> <FontAwesomeIcon icon={ icon } size="2x" /> </button>
   }
 }
