@@ -100,3 +100,9 @@ button.accept {
 .boxes .playbox {
   margin: 1em;
 }
+
+.main-spinner {
+  margin: 12em 0;
+  display: flex;
+  justify-content: center;
+}

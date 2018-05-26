@@ -29,7 +29,7 @@ class App extends Component {
   render() {
 
     // don't render app without a treatment.
-    if (!this.props.treatment) return <div className="main-spinner"> <FontAwesomeIcon spin size="2x" icon={faSpinner} /> </div>
+    if (!this.props.treatment) return <div className="main-spinner"> <FontAwesomeIcon spin size="4x" icon={faSpinner} /> </div>
 
     return (
       <ConnectedRouter history={history}>
