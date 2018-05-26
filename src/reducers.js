@@ -52,4 +52,8 @@ function code(state = null, action) {
   }
 }
 
-export default {responses, boxes, treatment, code}
+function version(state='0.2') {
+  return state
+}
+
+export default {responses, boxes, treatment, code, version}

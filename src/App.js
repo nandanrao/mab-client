@@ -11,6 +11,9 @@ import { ConnectedRouter, push } from 'react-router-redux';
 import history from './history';
 import {store} from './store';
 import random from './random';
+import {assignTreatment} from './actions';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner';
 
 class App extends Component {
 
@@ -19,15 +22,14 @@ class App extends Component {
 
     // create treatment!
     if (!props.treatment) {
-      const t = random.bool() ? 'a' : 'b';
-      store.dispatch({type: 'ASSIGN_TREATMENT', treatment: t })
+      store.dispatch(assignTreatment())
     }
   }
 
   render() {
 
     // don't render app without a treatment.
-    if (!this.props.treatment) return null
+    if (!this.props.treatment) return <div className="main-spinner"> <FontAwesomeIcon spin size="2x" icon={faSpinner} /> </div>
 
     return (
       <ConnectedRouter history={history}>
