@@ -6,6 +6,7 @@ import './App.css';
 import Introduction from './steps/Introduction';
 import Question from './steps/Question';
 import Play from './steps/Play';
+import BoxTypes from './steps/BoxTypes';
 import { Route } from 'react-router';
 import { ConnectedRouter, push } from 'react-router-redux';
 import history from './history';
@@ -37,6 +38,7 @@ class App extends Component {
           <Route exact path="/" render={(rp) => <Introduction {...rp} {...this.props} /> }/>
           <Route exact path="/play" render={(rp) => <Play {...rp} {...this.props} /> }/>
           <Route exact path="/question" render={(rp) => <Question {...rp} {...this.props} /> }/>
+          <Route exact path="/boxtypes" render={(rp) => <BoxTypes {...rp} {...this.props} /> }/>
         </div>
       </ConnectedRouter>
     );

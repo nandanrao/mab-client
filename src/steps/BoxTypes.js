@@ -24,17 +24,20 @@ export default (props) => {
     <div>
       <p> A green gem. You won! </p>
 
-      <button className="accept" onClick={() => store.dispatch(push('/boxtypes'))}> continue </button>
+      <button className="accept" onClick={() => store.dispatch(push('/play'))}> continue </button>
     </div>
   )
 
   return <div className="intro">
-    <p>
-    Thanks for coming. Here's the deal: all you have to do is click boxes. Here's an example of a box. Click it. What happens?
+    <p> There are two different types of boxes. "High" boxes have an up arrow, and "low" box have a "down" arrow:
     </p>
-    {playboxes[0]}
-  { boxes[0].result ? second : null}
-  { boxes[1].result ? third : null}
+
+    {playboxes}
+
+  <p>
+    If you win a High box, you will receive a $5 bonus to your MTurk account. If you win a Low box, you will receive a $1 bonus to your account. You can only win one box, however: as soon as you win a box, the game is over.
+    </p>
+
 </div>
 
 }

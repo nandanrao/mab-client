@@ -8,13 +8,15 @@ import faFeather from '@fortawesome/fontawesome-free-solid/faFeather';
 import faFrog from '@fortawesome/fontawesome-free-solid/faFrog';
 import faGem from '@fortawesome/fontawesome-free-solid/faGem';
 import faSkull from '@fortawesome/fontawesome-free-solid/faSkull';
+import faArrowUp from '@fortawesome/fontawesome-free-solid/faArrowUp';
+import faArrowDown from '@fortawesome/fontawesome-free-solid/faArrowDown';
 import random from '../random';
 
 export default class Playbox extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.icons = [faFrog, faFeather, faKiwiBird, faDove]
-    this.state = { icon: this.icons[random.integer(0,3)] };
+    this.state = { icon: props.value == 'high' ? faArrowUp : faArrowDown };
   }
 
   flipIcon =  () => {
