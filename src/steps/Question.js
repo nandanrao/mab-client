@@ -46,7 +46,7 @@ export default class Question extends Component {
     const q2 = (
       <div className="question">
         <p>
-          Do you wish to play another round? You will forfeit the ${winnings[1]} from your first round, which would otherwise be paid to you as a bonus. However, you will take home your winnings from the second round as a bonus.
+          Do you wish to play another round? If you choose to quit now, you will recieve a $0.75 bonus for your participation. If you choose to play another round, you will forfeit that $0.75 bonus, but will recieve a bonus equal to the number of boxes you win in the next round.
         </p>
 
         <button onClick={ () => {
