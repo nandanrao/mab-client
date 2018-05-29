@@ -59,13 +59,16 @@ export default class Question extends Component {
 
     const q3 = (<GuessProbability next="third" winnings={winnings} plays={plays} submit={submitGuess('q3')} />)
 
+    console.log(roundsPlayed)
+
     const q4 = (
       <div className="question">
         <p>
-          Thanks for participating! You won ${ finalWinnings }.
+          Thanks for participating! You won a bonus of ${ roundsPlayed.length > 2 ? finalWinnings : 0.75 }, which you will receive within 48 hours.
+
         </p>
         <p>
-          That's the end of the experiment. You will receive a ${finalWinnings} bonus within the next 48 hours. Please write down your completion code:
+          That's the end of the experiment. Please write down your completion code:
         </p>
         { code() }
       </div>
