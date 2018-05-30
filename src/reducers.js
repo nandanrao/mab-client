@@ -20,7 +20,10 @@ function winnings(state = 0, action) {
 function boxes(state = [], action) {
   switch (action.type){
   case 'ADD_GAME':
-    return [...state, generateFairGame(action.size, action.treatment)]
+    if (state.length === 2) {
+      return [...state, generateFairGame(action.size, action.treatment)]
+    }
+    return state
   case 'ASSIGN_TREATMENT':
     return initBoxes(action.treatment)
   case 'BOX_PLAYED':
