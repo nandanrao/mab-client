@@ -20,6 +20,10 @@ p {
   line-height: 1.5em;
 }
 
+.intro > .boxpair {
+  margin: 3em auto;
+}
+
 .question form {
   margin: 3em auto;
 }
@@ -71,7 +75,7 @@ button.accept {
 .play {
   width: 800px;
   max-width: 90%;
-  margin: 2em auto;
+  margin: 3em auto;
 }
 
 .play p {
@@ -81,6 +85,16 @@ button.accept {
 .play button:disabled {
   cursor: default;
   border-color: gray;
+}
+
+.play h3 {
+  font-size: 2em;
+  margin: 1em;
+}
+
+.play h3.won {
+  color: green;
+  font-size: 3em;
 }
 
 .play button:disabled:hover {

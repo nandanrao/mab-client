@@ -24,8 +24,8 @@ function boxes(state = [], action) {
   case 'ASSIGN_TREATMENT':
     return initBoxes(action.treatment)
   case 'BOX_PLAYED':
-    const {round, idx, result} = action
-    state[round][idx].result = result
+    const {round, idx, jdx, result} = action
+    state[round][idx][jdx].result = result
     return [...state]
   default:
     return state
@@ -56,4 +56,13 @@ function version(state='0.3') {
   return state
 }
 
-export default {responses, boxes, treatment, code, version}
+function transitioning(state = false, action) {
+  switch (action.type) {
+  case 'TRANSITIONING':
+    return action.state
+  default:
+    return state
+  }
+}
+
+export default {responses, boxes, treatment, code, version, transitioning}

@@ -2,8 +2,11 @@ import {store} from './store';
 import fetch from 'isomorphic-fetch';
 import { SERVER_URL } from './constants'
 import querystring from 'querystring';
-export function boxPlayed(round, idx, result) {
-  store.dispatch({type: 'BOX_PLAYED', round: round, idx: idx, result: result })
+
+export function boxPlayed(round, idx, jdx, result) {
+  store.dispatch({type: 'BOX_PLAYED', round: round, idx: idx, jdx:jdx, result: result })
+  store.dispatch({ type: 'TRANSITIONING', state: true })
+  setTimeout(() => store.dispatch({ type: 'TRANSITIONING', state: false }), 1000)
 }
 
 

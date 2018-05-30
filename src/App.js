@@ -7,7 +7,9 @@ import Introduction from './steps/Introduction';
 import Question from './steps/Question';
 import Play from './steps/Play';
 import BoxTypes from './steps/BoxTypes';
+import TheRub from './steps/TheRub';
 import { Route } from 'react-router';
+import {disablePair} from './utils';
 import { ConnectedRouter, push } from 'react-router-redux';
 import history from './history';
 import {store} from './store';
@@ -39,6 +41,7 @@ class App extends Component {
           <Route exact path="/play" render={(rp) => <Play {...rp} {...this.props} /> }/>
           <Route exact path="/question" render={(rp) => <Question {...rp} {...this.props} /> }/>
           <Route exact path="/boxtypes" render={(rp) => <BoxTypes {...rp} {...this.props} /> }/>
+          <Route exact path="/therub" render={(rp) => <TheRub {...rp} {...this.props} /> }/>
         </div>
       </ConnectedRouter>
     );
@@ -47,7 +50,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    ...state
+    ...state,
+    boxes: state.boxes.map(g => disablePair(g, state.transitioning))
   }
 };
 

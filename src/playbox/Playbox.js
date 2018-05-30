@@ -39,6 +39,7 @@ export default class Playbox extends Component {
   }
 
   click = () => {
+    this.props.rolling()
     const rate = 1.5
     const l = 14
     const times = [...Array(l).keys()].reduce((a,b) => [...a,  a.pop()*rate ], [2])
@@ -57,10 +58,13 @@ export default class Playbox extends Component {
         ? [faGem, 'green', true]
         : [faSkull, 'red', true];
     }
+    else if (this.props.disabled){
+      [icon, color, disabled] = [this.state.icon, 'grey', true ]
+    }
     else {
       [icon, color, disabled] = [this.state.icon, 'inherit', false]
     }
 
-    return <button className="playbox" disabled={!!this.props.result} style={{ color: color, borderColor: color }} onClick={this.click.bind(this)}> <FontAwesomeIcon icon={ icon } size="2x" /> </button>
+    return <button className="playbox" disabled={disabled} style={{ color: color, borderColor: color }} onClick={this.click.bind(this)}> <FontAwesomeIcon icon={ icon } size="2x" /> </button>
   }
 }
