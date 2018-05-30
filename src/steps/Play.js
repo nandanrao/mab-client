@@ -9,7 +9,8 @@ import Rounds from './Rounds';
 import {getResults, getWinnings} from '../utils';
 
 export default (props) => {
-  const {round, boxes, transitioning, button} = props
+  const {round, transitioning, button} = props
+  const boxes = props.boxes[props.boxes.length - 1]
 
   const allBoxesClicked = boxes.filter(b => !!b.result).reduce((a,b) => a+1, 0) === boxes.length
 
@@ -30,7 +31,7 @@ export default (props) => {
     <Rounds boxes={boxes} />
     {winnings > 0 ? null : <div className="boxes"> {playboxes[curr]} </div>}
     <h3 className={winnings === 0 ? null : 'won'}> Won: ${winnings} </h3>
-    { !button ? null : <button disabled={!allBoxesClicked && winnings === 0} className="accept" onClick={() => store.dispatch(push(`/question?q=${round === 1 ? 1 : 3 }`))}> continue </button>}
+    { !button ? null : <button disabled={!allBoxesClicked && winnings === 0} className="accept" onClick={() => store.dispatch(push(`/question?q=${ 1 }`))}> continue </button>}
 
     </div>
 }

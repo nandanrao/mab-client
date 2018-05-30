@@ -1,22 +1,28 @@
-export function generateFairGame(rounds) {
-  return [...Array(rounds)].map(i =>  ({result: null, outcome: 1/rounds}))
+import random from './random';
+
+export function generateFairGame(rounds, {skill}) {
+  const gameType = skill ? 'high' : 'low';
+  const o = {result: null, outcome: 2/rounds}
+  const a = [...Array(rounds)]
+  if (gameType === 'high') {
+    return a.map(i =>  [{...o, value: 'high'}, {...o, value: 'low'}])
+  }
+  if (gameType === 'low') {
+    return a.map(i =>  [{...o, outcome: 'lose', value: 'high'}, {...o, value: 'low'}])
+  }
 }
 
-export function initBoxes(treatment) {
-  let first, second;
-        // const plays = treatment == 'a' ? 3 : 15;
+export function initBoxes({ab}) {
+
+  const plays = ab == 'a' ? 12 : 36;
   const o = {result: null, outcome: 'lose'}
-  if (treatment === 'a') {
-    first = [...Array(12)].map(i =>  [{...o, value: 'high'}, {...o, value: 'low'}])
-    first[3] = first[3].map(b => ({...b, outcome:'win'}))
-  }
-  else if (treatment === 'b'){
-    first = [...Array(45)].map(i =>  [{...o, value: 'high'}, {...o, value: 'low'}])
-    first[6] = first[3].map(b => ({...b, outcome:'win'}))
-  }
+
+  const first = [...Array(plays)].map(i =>  [{...o, value: 'high'}, {...o, value: 'low'}])
+  first[3] = first[3].map(b => ({...b, outcome:'win'}))
+
   const introBoxes = [
-    [{result: null, outcome: 'lose', value: 'high' }, {result: null, outcome:'lose', value: 'low'}],
-    [{result: null, outcome: 'win', value: 'high'}, {result: null, outcome:'win', value: 'low'}]
+    [{...o, value: 'high' }, {...o, value: 'low'}],
+    [{...o, outcome: 'win', value: 'high'}, {...o, outcome:'win', value: 'low'}]
   ]
 
   return [introBoxes].concat([first])

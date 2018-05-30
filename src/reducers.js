@@ -20,7 +20,7 @@ function winnings(state = 0, action) {
 function boxes(state = [], action) {
   switch (action.type){
   case 'ADD_GAME':
-    return [...state, generateFairGame(action.size)]
+    return [...state, generateFairGame(action.size, action.treatment)]
   case 'ASSIGN_TREATMENT':
     return initBoxes(action.treatment)
   case 'BOX_PLAYED':
@@ -52,7 +52,7 @@ function code(state = null, action) {
   }
 }
 
-function version(state='0.3') {
+function version(state='0.4') {
   return state
 }
 

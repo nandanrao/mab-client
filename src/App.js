@@ -30,6 +30,7 @@ class App extends Component {
   }
 
   render() {
+    const playRound = this.props.boxes.length - 1
 
     // don't render app without a treatment.
     if (!this.props.treatment) return <div className="main-spinner"> <FontAwesomeIcon spin size="4x" icon={faSpinner} /> </div>
@@ -38,7 +39,7 @@ class App extends Component {
       <ConnectedRouter history={history}>
         <div className="App">
           <Route exact path="/" render={(rp) => <Introduction {...rp} {...this.props} /> }/>
-          <Route exact path="/play" render={(rp) => <Play {...rp} {...this.props} /> }/>
+          <Route exact path="/play" render={(rp) => <Play {...rp} {...this.props} round={playRound} button={true} /> }/>
           <Route exact path="/question" render={(rp) => <Question {...rp} {...this.props} /> }/>
           <Route exact path="/boxtypes" render={(rp) => <BoxTypes {...rp} {...this.props} /> }/>
           <Route exact path="/therub" render={(rp) => <TheRub {...rp} {...this.props} /> }/>

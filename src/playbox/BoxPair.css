@@ -1,0 +1,11 @@
+.boxpair {
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1em auto;
+}
+
+span.box-number {
+
+}
