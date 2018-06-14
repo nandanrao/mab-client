@@ -7,7 +7,6 @@ import {boxPlayed} from '../actions';
 
 export default (props) => {
 
-  console.log(props.boxes)
   const boxes = props.boxes[0]
 
   const playboxes = boxes.map((b,i) => <Playbox key={i} report={boxPlayed.bind(this, 0, i)} result={b.result} outcome={b.outcome} speed={props.boxSpeed } />)
