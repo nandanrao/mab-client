@@ -14,17 +14,18 @@ export default (props) => {
 
   const second = (
     <div>
-      <p> You lost! Now try this box: </p>
+      <p> The box had a red skull inside! Now try this box: </p>
       {playboxes[1]}
     </div>
     )
 
   const third = (
     <div>
-      <p> A green gem. You won! </p>
+      <p> A green gem! </p>
 
-      <p> This was just a practise, but in the real game, you win $5 if you get a green gem. </p>
-      <button className="accept" onClick={() => store.dispatch(push('/play'))}> continue </button>
+      <p> In this game, a green gem wins you a $5 MTurk bonus. </p>
+      <p> A red skull wins you nothing. </p>
+      <button className="accept" onClick={() => store.dispatch(push('/therub'))}> continue </button>
     </div>
   )
 
