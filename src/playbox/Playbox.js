@@ -61,6 +61,12 @@ export default class Playbox extends Component {
       [icon, color, disabled] = [this.state.icon, 'inherit', false]
     }
 
-    return <button className="playbox" disabled={!!this.props.result} style={{ color: color, borderColor: color }} onClick={this.click.bind(this)}> <FontAwesomeIcon icon={ icon } size="2x" /> </button>
+    return <button
+    className="playbox"
+    autoFocus
+    disabled={!!this.props.result}
+    style={{ color: color, borderColor: color }}
+    onClick={this.click}
+      > <FontAwesomeIcon icon={ icon } size="2x" /> </button>
   }
 }
