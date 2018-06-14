@@ -20,8 +20,11 @@ function winnings(state = 0, action) {
 function boxes(state = [], action) {
   switch (action.type){
   case 'ADD_BOX':
-    state[action.round] = [...state[action.round], fairBox(action.treatment)]
-    return state
+    const newState = state.slice()
+    newState[action.round] = [...state[action.round], fairBox(action.treatment)]
+    return newState
+  case 'ADD_FIRST_BOX':
+    return [...state, [{ result: null, outcome: 'lose', timestamp: new Date() }]]
   case 'ASSIGN_TREATMENT':
     return initBoxes(action.treatment)
   case 'BOX_PLAYED':

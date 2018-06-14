@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {push} from 'react-router-redux';
 import {store} from '../store';
+import {getWinnings} from '../utils';
 import qs from 'query-string';
 import {submit} from '../actions';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
@@ -15,7 +16,7 @@ export default class Question extends Component {
 
     const roundsPlayed = props.boxes[1].length
 
-    const finalWinnings = props.boxes[1].filter(b => b.result === 'win').length > 0 ? 5 : 0;
+    const finalWinnings = getWinnings(props.boxes[1])
 
     const code = () => {
       if (props.code === '_FETCHING') {

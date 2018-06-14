@@ -113,3 +113,13 @@ button.accept {
   display: flex;
   justify-content: center;
 }
+
+.timer h3 {
+  text-transform: uppercase;
+  color: grey;
+  font-size: 1.5em;
+  text-align: center;
+}
+.timer span {
+  color: black;
+}

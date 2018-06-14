@@ -18,7 +18,6 @@ export default class Playbox extends Component {
     super();
     this.icons = [faFrog, faChessQueen, faFeather, faKiwiBird, faDove, faChessKnight]
     this.state = { icon: this.icons[random.integer(0,4)], rolling: false };
-    this.playbox = React.createRef();
   }
 
   flipIcon =  () => {
@@ -55,7 +54,6 @@ export default class Playbox extends Component {
   onKeyDown = (e) => {
     if ( e.code === 'Space' &&
          !this.state.rolling &&
-         !this.props.transitioning &&
          !this.props.result)
     {
       this.click();
@@ -75,24 +73,18 @@ export default class Playbox extends Component {
   render() {
     let icon, color, disabled;
 
-
     if (this.props.result) {
       [icon, color, disabled] = this.props.result === 'win'
         ? [faGem, 'green', true]
         : [faSkull, 'red', true];
-    }
-
-    else if (this.state.rolling) {
+    } else if (this.state.rolling) {
       [icon, color, disabled] = [this.state.icon, 'inherit', true]
-    }
-
-    else {
+    } else {
       [icon, color, disabled] = [this.state.icon, 'inherit', false]
     }
 
     return <button
     className="playbox"
-    ref = {this.playbox}
     disabled={disabled}
     style={{ color: color, borderColor: color }}
     onClick={this.click}

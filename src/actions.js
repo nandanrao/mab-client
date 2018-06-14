@@ -4,11 +4,14 @@ import { SERVER_URL } from './constants'
 import querystring from 'querystring';
 import random from './random';
 
-export function boxPlayed(round, idx, result) {
+export function boxPlayed(round, idx, result, treatment, add = false) {
   store.dispatch({type: 'BOX_PLAYED', round: round, idx: idx, result: result })
-  store.dispatch({ type: 'TRANSITIONING', state: true })
-  const timeout = result === 'win' ? 500 : 1500
-  setTimeout(() => store.dispatch({ type: 'TRANSITIONING', state: false }), timeout)
+  const timeout = 1500
+  if (add) {
+    setTimeout(() => {
+      store.dispatch({ type: 'ADD_BOX', round, treatment })
+    }, timeout)
+  }
 }
 
 

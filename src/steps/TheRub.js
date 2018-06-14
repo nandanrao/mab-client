@@ -30,7 +30,7 @@ Right now, you don't know which group you are in. Maybe you can win $5, maybe yo
  Ready? Click below to play:
 </p>
     <button className="accept" onClick={ () => {
-            store.dispatch({ type: 'ADD_GAME', size: boxes.length, treatment: props.treatment })
+            store.dispatch({ type: 'ADD_FIRST_BOX' })
             store.dispatch(push('/play'))
     }}> begin </button>
     </div>
