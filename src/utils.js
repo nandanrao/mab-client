@@ -1,9 +1,12 @@
-export function getSpeed(treat) {
-  return treat === 'a' ? 'fast' : 'slow';
+export function getSpeed(treatment) {
+  if (treatment) {
+    return treatment.ab === 'a' ? 'fast' : 'slow';
+  }
+  return 'fast'
 }
 
 export function fairBox({skill, ab}) {
-  if (skill === 'low') {
+  if (skill === false) {
     return { result: null, outcome: 'lose' }
   }
   else if (ab === 'a') {

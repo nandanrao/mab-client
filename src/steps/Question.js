@@ -9,27 +9,13 @@ import GuessProbability from './GuessProbability';
 
 export default class Question extends Component {
 
-
-
-
   render() {
     const props = this.props
     const q = +qs.parse(props.location.search).q
-    const plays = props.boxes[1].length;
 
-    const submitGuess = (key) => (vals) => {
-      store.dispatch({ type: 'NEW_RESPONSE', responses: { [key]: vals }})
-      store.dispatch(push(`/question?q=${ q+1 }`))
-    }
+    const roundsPlayed = props.boxes[1].length
 
-    const roundsPlayed = props.boxes.filter(round => {
-      return round.map(b => b.result).filter(res => !!res).length > 0
-    })
-
-    const winnings = roundsPlayed.map(r => r.filter(b => b.result === 'win').reduce((a,b) => a+1, 0))
-
-    const finalWinnings = winnings.slice().pop()
-
+    const finalWinnings = props.boxes[1].filter(b => b.result === 'win').length > 0 ? 5 : 0;
 
     const code = () => {
       if (props.code === '_FETCHING') {
@@ -40,32 +26,10 @@ export default class Question extends Component {
       }
       return <button onClick={ () => store.dispatch(submit())}> generate code </button>
     }
-
-    const q1 = (<GuessProbability next="second" winnings={winnings} plays={plays} submit={submitGuess('q1')} />)
-
-    const q2 = (
-      <div className="question">
-        <p>
-          Do you wish to play another round? If you choose to quit now, you will recieve a $0.75 bonus for your participation. If you choose to play another round, you will forfeit that $0.75 bonus, but will recieve a bonus equal to the number of boxes you win in the next round.
-        </p>
-
-        <button onClick={ () => {
-            store.dispatch({ type: 'ADD_GAME', size: props.boxes[1].length})
-            store.dispatch(push('/play'))
-          }}> play again </button>
-        <button onClick={ () => store.dispatch(push('/question?q=4'))}> stop now </button>
-      </div>
-    )
-
-    const q3 = (<GuessProbability next="third" winnings={winnings} plays={plays} submit={submitGuess('q3')} />)
-
-    console.log(roundsPlayed)
-
     const q4 = (
       <div className="question">
         <p>
-          Thanks for participating! You won a bonus of ${ roundsPlayed.length > 2 ? finalWinnings : 0.75 }, which you will receive within 48 hours.
-
+          Thanks for participating! You won a bonus of ${ finalWinnings }, which you will receive within 48 hours.
         </p>
         <p>
           That's the end of the experiment. Please write down your completion code:
@@ -73,6 +37,6 @@ export default class Question extends Component {
         { code() }
       </div>
   )
-  return [null, q1, q2, q3, q4][q]
+  return [null, null, null, null, q4][q]
 }
 }

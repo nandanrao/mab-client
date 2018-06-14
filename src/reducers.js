@@ -1,5 +1,5 @@
 import {store} from './store';
-import {initBoxes} from './utils';
+import {initBoxes, fairBox} from './utils';
 
 function responses(state = {}, action) {
   switch (action.type){
@@ -19,8 +19,9 @@ function winnings(state = 0, action) {
 
 function boxes(state = [], action) {
   switch (action.type){
-  // case 'ADD_GAME':
-  //   return [...state, generateFairGame(action.size)]
+  case 'ADD_BOX':
+    state[action.round] = [...state[action.round], fairBox(action.treatment)]
+    return state
   case 'ASSIGN_TREATMENT':
     return initBoxes(action.treatment)
   case 'BOX_PLAYED':
@@ -52,8 +53,17 @@ function code(state = null, action) {
   }
 }
 
-function version(state='0.3') {
+function transitioning(state = false, action) {
+  switch (action.type) {
+  case 'TRANSITIONING':
+    return action.state
+  default:
+    return state
+  }
+}
+
+function version(state='0.5') {
   return state
 }
 
-export default {responses, boxes, treatment, code, version}
+export default {responses, boxes, treatment, code, version, transitioning}

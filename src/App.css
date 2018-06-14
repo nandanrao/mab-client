@@ -80,6 +80,7 @@ button.accept {
 
 .play p {
   text-align: center;
+  margin: 1em auto;
 }
 
 .play button:disabled {

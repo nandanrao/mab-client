@@ -11,12 +11,14 @@ import faChessKnight from '@fortawesome/fontawesome-free-solid/faChessKnight';
 import faGem from '@fortawesome/fontawesome-free-solid/faGem';
 import faSkull from '@fortawesome/fontawesome-free-solid/faSkull';
 import random from '../random';
+import _ from 'lodash';
 
 export default class Playbox extends Component {
   constructor() {
     super();
     this.icons = [faFrog, faChessQueen, faFeather, faKiwiBird, faDove, faChessKnight]
-    this.state = { icon: this.icons[random.integer(0,4)] };
+    this.state = { icon: this.icons[random.integer(0,4)], rolling: false };
+    this.playbox = React.createRef();
   }
 
   flipIcon =  () => {
@@ -39,6 +41,7 @@ export default class Playbox extends Component {
   }
 
   click = () => {
+    this.setState({ rolling: true  })
     const speed = this.props.speed;
     const [ rate, l ] = speed == 'slow' ? [ 1.10, 90 ] : [ 1.5, 15 ];
     const times = [...Array(l).keys()].reduce((a,b) => [...a,  a.pop()*rate ], [2]);
@@ -49,22 +52,48 @@ export default class Playbox extends Component {
     setTimeout(this.roll, lst*rate)
   }
 
+  onKeyDown = (e) => {
+    if ( e.code === 'Space' &&
+         !this.state.rolling &&
+         !this.props.transitioning &&
+         !this.props.result)
+    {
+      this.click();
+    }
+  }
+
+  throttledKeyDown = _.throttle(this.onKeyDown, 200)
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.throttledKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.throttledKeyDown);
+  }
+
   render() {
     let icon, color, disabled;
+
 
     if (this.props.result) {
       [icon, color, disabled] = this.props.result === 'win'
         ? [faGem, 'green', true]
         : [faSkull, 'red', true];
     }
+
+    else if (this.state.rolling) {
+      [icon, color, disabled] = [this.state.icon, 'inherit', true]
+    }
+
     else {
       [icon, color, disabled] = [this.state.icon, 'inherit', false]
     }
 
     return <button
     className="playbox"
-    autoFocus
-    disabled={!!this.props.result}
+    ref = {this.playbox}
+    disabled={disabled}
     style={{ color: color, borderColor: color }}
     onClick={this.click}
       > <FontAwesomeIcon icon={ icon } size="2x" /> </button>

@@ -2,10 +2,19 @@ import {store} from './store';
 import fetch from 'isomorphic-fetch';
 import { SERVER_URL } from './constants'
 import querystring from 'querystring';
+import random from './random';
+
 export function boxPlayed(round, idx, result) {
   store.dispatch({type: 'BOX_PLAYED', round: round, idx: idx, result: result })
+  store.dispatch({ type: 'TRANSITIONING', state: true })
+  const timeout = result === 'win' ? 500 : 1500
+  setTimeout(() => store.dispatch({ type: 'TRANSITIONING', state: false }), timeout)
 }
 
+
+export function addBox(round, treatment) {
+  store.dispatch({ type: 'ADD_BOX', round, treatment })
+}
 
 export function submit() {
   return (dispatch, getState) => {
@@ -35,10 +44,12 @@ export function assignTreatment() {
     const qs = querystring.stringify({version: version})
     fetch(`${SERVER_URL}/treatment?${qs}`)
       .then(res => res.json())
-      .then(res => store.dispatch({ type: 'ASSIGN_TREATMENT', treatment: res.treatment}))
+      .then(res => store.dispatch({
+        type: 'ASSIGN_TREATMENT', treatment: { ab: res.treatment, skill: random.bool(.5) }
+      }))
       .catch(err => {
         console.error(err)
-        window.location.reload()
+        setTimeout(() => window.location.reload(), 3000)
       })
   }
 }

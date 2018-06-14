@@ -3,28 +3,45 @@ import Playbox from '../playbox/Playbox';
 import {push} from 'react-router-redux';
 import {store} from '../store';
 import qs from 'query-string';
-import {boxPlayed} from '../actions';
+import {boxPlayed, addBox} from '../actions';
 import random from '../random';
 
 
 export default (props) => {
 
-  // Get last box
+  const handleClick = () => {
+    if (window.confirm('Are you sure you want to quit?')) {
+      store.dispatch(push(`/question?q=${4}`))
+    }
+  }
+
   const round = 1;
-  const idx = props.boxes[round].length - 1
+
+  let idx = props.boxes[round].length - 1
+
+  if (props.transitioning) {
+    idx = Math.max(idx - 1, 0)
+  }
+
   const box = props.boxes[round][idx]
 
-  console.log(idx, box)
+  const report = (result) => {
+    boxPlayed(round, idx, result);
+    addBox(round, props.treatment);
+  }
 
-  const playBox = <Playbox report={boxPlayed.bind(this, 1, idx)} result={box.result} outcome={box.outcome }/>
+  const playBox = <Playbox report={report} key={idx} result={box.result} outcome={box.outcome }/>
 
   return <div className="play">
     <p>
-        Click boxes. Play until you win, or quit!
+       Hint: you can also press the spacebar instead of clicking.
+    </p>
+    <p>
+    Good luck!
     </p>
     <div className="box">
     {playBox}
   </div>
-    <button className="accept" onClick={() => store.dispatch(push(`/question?q=${4}`))}> quit </button>
+    <button className="accept" onClick={handleClick}> quit </button>
     </div>
 }
