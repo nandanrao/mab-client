@@ -9,7 +9,8 @@ export default (props) => {
 
   const boxes = props.boxes[0]
   const plays = props.boxes[1].length;
-  const playboxes = boxes.map((b,i) => <Playbox key={i} report={boxPlayed.bind(this, 0, i)} result={b.result} outcome={b.outcome}/>)
+
+  const playboxes = boxes.map((b,i) => <Playbox key={i} report={boxPlayed.bind(this, 0, i)} result={b.result} outcome={b.outcome} speed={props.boxSpeed } />)
 
   const second = (
     <div>
@@ -22,7 +23,7 @@ export default (props) => {
     <div>
       <p> A green gem. You won! </p>
 
-      <p>You will be shown {plays} boxes on the next screen. For every box you win, you get $1 in bonus payments to your MTurk account. </p>
+      <p> This was just a practise, but in the real game, you win $5 if you get a green gem. </p>
       <button className="accept" onClick={() => store.dispatch(push('/play'))}> continue </button>
     </div>
   )

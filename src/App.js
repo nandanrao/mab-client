@@ -10,6 +10,7 @@ import { Route } from 'react-router';
 import { ConnectedRouter, push } from 'react-router-redux';
 import history from './history';
 import {store} from './store';
+import {getSpeed} from './utils';
 import random from './random';
 import {assignTreatment} from './actions';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
@@ -45,7 +46,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    ...state
+    ...state,
+    boxSpeed: getSpeed(state.treatment)
   }
 };
 

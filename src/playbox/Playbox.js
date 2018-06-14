@@ -6,6 +6,8 @@ import faDove from '@fortawesome/fontawesome-free-solid/faDove';
 import faKiwiBird from '@fortawesome/fontawesome-free-solid/faKiwiBird';
 import faFeather from '@fortawesome/fontawesome-free-solid/faFeather';
 import faFrog from '@fortawesome/fontawesome-free-solid/faFrog';
+import faChessQueen from '@fortawesome/fontawesome-free-solid/faChessQueen';
+import faChessKnight from '@fortawesome/fontawesome-free-solid/faChessKnight';
 import faGem from '@fortawesome/fontawesome-free-solid/faGem';
 import faSkull from '@fortawesome/fontawesome-free-solid/faSkull';
 import random from '../random';
@@ -13,8 +15,8 @@ import random from '../random';
 export default class Playbox extends Component {
   constructor() {
     super();
-    this.icons = [faFrog, faFeather, faKiwiBird, faDove]
-    this.state = { icon: this.icons[random.integer(0,3)] };
+    this.icons = [faFrog, faChessQueen, faFeather, faKiwiBird, faDove, faChessKnight]
+    this.state = { icon: this.icons[random.integer(0,4)] };
   }
 
   flipIcon =  () => {
@@ -37,9 +39,9 @@ export default class Playbox extends Component {
   }
 
   click = () => {
-    const rate = 1.5
-    const l = 14
-    const times = [...Array(l).keys()].reduce((a,b) => [...a,  a.pop()*rate ], [2])
+    const speed = this.props.speed;
+    const [ rate, l ] = speed == 'slow' ? [ 1.10, 90 ] : [ 1.5, 15 ];
+    const times = [...Array(l).keys()].reduce((a,b) => [...a,  a.pop()*rate ], [2]);
     times.forEach(i => {
       setTimeout(this.flipIcon, i);
     })

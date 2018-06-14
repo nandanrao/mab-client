@@ -2,6 +2,10 @@ export function generateFairGame(rounds) {
   return [...Array(rounds)].map(i =>  ({result: null, outcome: 1/rounds}))
 }
 
+export function getSpeed(treat) {
+  return treat === 'a' ? 'fast' : 'slow';
+}
+
 export function initBoxes(treatment) {
   let first, second;
   if (treatment === 'a') {
