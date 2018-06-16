@@ -52,7 +52,7 @@ function code(state = null, action) {
   }
 }
 
-function version(state='0.3') {
+function version(state='0.31') {
   return state
 }
 

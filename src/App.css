@@ -15,7 +15,7 @@ p {
   font-size: 2em;
 }
 
-.intro p, .question p {
+.intro p, .question p, .therub p {
   margin: 1em auto;
   line-height: 1.5em;
 }
@@ -38,12 +38,16 @@ p {
   display: block;
 }
 
-div.intro, div.question {
+div.intro, div.question, div.therub {
   text-align: center;
   width: 80%;
   max-width: 800px;
   margin: 4em auto;
 }
+
+/* div.therub { */
+/*   text-align: left; */
+/* } */
 
 .question button {
   display: block;

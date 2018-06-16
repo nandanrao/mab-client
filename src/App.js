@@ -6,6 +6,7 @@ import './App.css';
 import Introduction from './steps/Introduction';
 import Question from './steps/Question';
 import Play from './steps/Play';
+import TheRub from './steps/TheRub.js';
 import { Route } from 'react-router';
 import { ConnectedRouter, push } from 'react-router-redux';
 import history from './history';
@@ -35,7 +36,8 @@ class App extends Component {
       <ConnectedRouter history={history}>
         <div className="App">
           <Route exact path="/" render={(rp) => <Introduction {...rp} {...this.props} /> }/>
-          <Route exact path="/play" render={(rp) => <Play {...rp} {...this.props} /> }/>
+            <Route exact path="/therub" render={(rp) => <TheRub {...rp} {...this.props} /> }/>
+            <Route exact path="/play" render={(rp) => <Play {...rp} {...this.props} /> }/>
           <Route exact path="/question" render={(rp) => <Question {...rp} {...this.props} /> }/>
         </div>
       </ConnectedRouter>
