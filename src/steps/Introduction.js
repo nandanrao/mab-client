@@ -22,7 +22,7 @@ export default (props) => {
     <div>
       <p> A green gem!</p>
 
-      <p> In this game, you will recieve a $5 in bonus payment to your MTurk account if you find any green gems. </p>
+      <p> You will recieve a $5 bonus payment to your MTurk account if you find any green gems while playing the game. </p>
       <button className="accept" onClick={() => store.dispatch(push('/therub'))}> continue </button>
     </div>
   )
