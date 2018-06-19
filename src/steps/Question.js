@@ -67,7 +67,7 @@ export default class Question extends Component {
     const q4 = (
       <div className="question">
         <p>
-          Thanks for participating! You won a bonus of ${ roundsPlayed.length > 2 ? finalWinnings : 0.75 }, which you will receive within 48 hours.
+          Thanks for participating! You won a bonus of ${ roundsPlayed.length > 2 ? finalWinnings : 2 }, which you will receive within 48 hours.
 
         </p>
         <p>
