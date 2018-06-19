@@ -26,10 +26,9 @@ export default class Question extends Component {
       return round.map(b => b.result).filter(res => !!res).length > 0
     })
 
-    const winnings = roundsPlayed.map(r => r.filter(b => b.result === 'win').reduce((a,b) => a+1, 0))
+    const winnings = roundsPlayed.map(r => r.filter(b => b.result === 'win').reduce((a,b) => a+1, 0)).map(w => Math.min(w*5, 5))
 
     const finalWinnings = winnings.slice().pop()
-
 
     const code = () => {
       if (props.code === '_FETCHING') {
@@ -41,7 +40,7 @@ export default class Question extends Component {
       return <button onClick={ () => store.dispatch(submit())}> generate code </button>
     }
 
-    const q1 = (<GuessProbability next="second" winnings={winnings} plays={plays} submit={submitGuess('q1')} />)
+    const q1 = (<GuessProbability next="second" winnings={winnings[1]} plays={plays} submit={submitGuess('q1')} />)
 
     const q2 = (
       <div className="question">
@@ -63,9 +62,7 @@ export default class Question extends Component {
       </div>
     )
 
-    const q3 = (<GuessProbability next="third" winnings={winnings} plays={plays} submit={submitGuess('q3')} />)
-
-    console.log(roundsPlayed)
+    const q3 = (<GuessProbability next="third" winnings={winnings[2]} plays={plays} submit={submitGuess('q3')} />)
 
     const q4 = (
       <div className="question">

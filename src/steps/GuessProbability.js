@@ -22,10 +22,10 @@ export default class Guess extends Component {
     return (
       <div className="question">
         <p>
-          You won ${winnings[1]}.
+          You won ${winnings}.
         </p>
         <p>
-          If you had the option to play a { next } round (with another {plays} boxes), what do you think the probability is that you will win, in that round, $1 or more?
+        If you had the option to play a { next } round (with another {plays} boxes), what do you think the probability is that you will win a green gem in that round?
         </p>
         <form onSubmit={this.onSubmit}>
           <span> 0% </span> <input onChange={ this.onChange('prob') } value={this.state.prob} type="range" min="0" max="100" /><span> 100% </span>
